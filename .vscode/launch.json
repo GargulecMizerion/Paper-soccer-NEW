@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "vslsRemoteLaunch",
+            "name": "Paper-soccer",
+            "request": "attach",
+            "projectID": "80c55e37-ff32-4057-bf09-8c82d0cbf264"
+        }
+    ]
+}
