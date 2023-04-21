@@ -1,8 +1,11 @@
 #pragma once
 #include "Field.h"
 #include <vector>
+#include "BoardFrame.h"
+
 
 using namespace std;
+
 class Board
 {
 private:
@@ -11,8 +14,10 @@ private:
 	Field currentField;
 
 public:
-	Board(vector<vector<Field>> fields, int x, int y);
-	void setCurerntField(Field field);
+
+	Board(int x, int y, BoardFrame* parent);
+	void setCurrentField(Field field);
+	vector<vector<Field>> getFields();
 	Field getCurrentField();
 	int getX();
 	int getY();
