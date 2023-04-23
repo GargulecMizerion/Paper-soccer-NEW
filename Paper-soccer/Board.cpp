@@ -1,12 +1,15 @@
 #include "Board.h"
 #include <vector>
-#include "BoardFrame.h"
+
 
 using namespace std;
 
-Board::Board(int x, int y, BoardFrame* parent) {
+Board::Board(int x, int y) {
 	this->x = x;
 	this->y = y;
+
+	this->current_x = x / 2;
+	this->current_y = y / 2;
 
 	for (int i = 0; i < y; i++) {
 		vector<Field> row;
@@ -29,10 +32,7 @@ Board::Board(int x, int y, BoardFrame* parent) {
 		for (int j = 0; j < x; j++) {
 
 			// Tworzenie przycisków
-			wxButton* fieldButton = new wxButton(parent, wxID_ANY, " ", wxPoint(20 + 30 * j, 20 + 30 * i), wxSize(10, 10));
 
-			this->fields[i][j].setFieldBtn(fieldButton);
-			this->fields[i][j].getFieldBtn()->Disable();
 
 			if (i == 0) {          // USTAWIAM WSKAZNIKI W PIERWSZYM WIERSZU
 				if (j == 0) {
@@ -101,7 +101,12 @@ Board::Board(int x, int y, BoardFrame* parent) {
 			}
 		}
 	}
+	
+
+	
+
 }
+
 
 
 
@@ -128,4 +133,8 @@ int Board::getX()
 int Board::getY()
 {
 	return this->y;
+}
+
+Field* Board::getFieldAt(int x, int y) {
+	return &(this->fields[y][x]);
 }

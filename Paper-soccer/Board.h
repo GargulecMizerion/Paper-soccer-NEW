@@ -1,7 +1,6 @@
 #pragma once
 #include "Field.h"
 #include <vector>
-#include "BoardFrame.h"
 
 
 using namespace std;
@@ -14,11 +13,13 @@ private:
 	Field currentField;
 
 public:
-
-	Board(int x, int y, BoardFrame* parent);
+	int current_x, current_y;
+	Board(int x, int y);
 	void setCurrentField(Field field);
 	vector<vector<Field>> getFields();
 	Field getCurrentField();
+	Field* getFieldAt(int x, int y);
 	int getX();
 	int getY();
+
 };
