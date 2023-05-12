@@ -2,20 +2,17 @@
 #include <wx/wx.h>
 #include "BoardFrame.h"
 #include "StartFrame.h"
+#include "MainFrame.h"
 
 using namespace std;
 wxIMPLEMENT_APP(App);
 
 bool App::OnInit() {
-	BoardFrame* boardFrame = new BoardFrame("Paper Soccer");
-	StartFrame* startFrame = new StartFrame("Paper Soccer");
+	MainFrame* mainFrame = new MainFrame("Paper Soccer");
 
+	mainFrame->SetClientSize(400, 500);
 
-	boardFrame->SetClientSize(400, 500);
-	startFrame->SetClientSize(400, 500);
-
-	startFrame->Show();
-	//boardFrame->Show();
+	mainFrame->Show();
 
 	return true;
 }
