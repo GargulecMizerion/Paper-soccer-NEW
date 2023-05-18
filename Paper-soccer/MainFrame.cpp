@@ -3,33 +3,61 @@
 #include "BoardFrame.h"
 #include "wx/wx.h"
 #include "BoardPanel.h"
-#include "StartPanel.h"
 
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title)
 {
-
-	//wxMediaCtrl* m_mediaCtrl = new wxMediaCtrl(this, wxID_ANY, "C:/Users/Komputer/Downloads/INTRO.avi",
-		//wxDefaultPosition, wxDefaultSize,0L,wxEmptyString, wxMEDIABACKEND_DIRECTSHOW,L"mediaCtrl",);
-
-	// Wczytanie pliku wideo
-	//m_mediaCtrl->Load("C:/Users/Komputer/Downloads/UEFA.mp4");
-
-	// Ustawienie rozmiaru i pozycji wxMediaCtrl
-	//m_mediaCtrl->SetSize(wxSize(400, 500));
-	//m_mediaCtrl->SetPosition(wxPoint(0, 0));
-	// DO MAINFRAME Przenieœæ
-	//StartPanel* startPanel = new StartPanel(this, "StartPanel");
-	CreateStatusBar();
-	BoardPanel* boardPanel = new BoardPanel(this, "BoardPanel");
-	
+    /*
+    CreateStatusBar();
+    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    this->setSizer(sizer);
 
 
+    wxButton* start_btn = new wxButton(this, wxID_ANY, "START", wxPoint(80, 20), wxSize(100, 100));
 
-	//BoardFrame* boardFrame = new BoardFrame("Paper Soccer");
-	//StartFrame* startFrame = new StartFrame("Paper Soccer");
-	//boardFrame->SetClientSize(400, 500);
-	//startFrame->SetClientSize(400, 500);
-	//startFrame->Show();
-	//boardFrame->Show();
+    if(this->flaga) {
+        BoardPanel* boardPanel = new BoardPanel(this, "");
+        start_btn->Destroy();
+        start_btn->GetParent()->Layout();
+        delete start_btn;
+    }
+
+    auto startbtn = std::bind(&MainFrame::startOnClick, this, std::placeholders::_1, &(this->flaga));
+    start_btn->Bind(wxEVT_BUTTON, startbtn);
+    // DO MAINFRAME Przenieœæ
+
+    //BoardFrame* boardFrame = new BoardFrame("Paper Soccer");
+    //boardFrame->SetClientSize(400, 500);
+    //startFrame->SetClientSize(400, 500);
+    //boardFrame->Show();*/
+    CreateStatusBar();
+
+    wxButton* start_btn = new wxButton(this, wxID_ANY, "START", wxPoint(80, 20), wxSize(100, 100));
+    wxButton* exit_btn = new wxButton(this, wxID_ANY, "EXIT", wxPoint(80, 200), wxSize(100, 100));
+
+    auto startbtn = std::bind(&MainFrame::startOnClick, this, std::placeholders::_1, exit_btn);
+    start_btn->Bind(wxEVT_BUTTON, startbtn);
+    exit_btn->Bind(wxEVT_BUTTON, &MainFrame::exitOnClick, this);
+
+
 }
 
+void MainFrame::startOnClick(wxCommandEvent& event, wxButton* exit_btn)
+{
+    wxButton* start_btn = dynamic_cast<wxButton*>(event.GetEventObject());
+    //wxButton* exit_btn = dynamic_cast<wxButton*>(event.GetEventObject());
+    if (start_btn)
+    {
+        start_btn->Destroy();
+        exit_btn->Destroy();
+        //GetParent()->Layout();
+        BoardPanel* boardPanel = new BoardPanel(this, "");
+        boardPanel->SetClientSize(400, 500);
+        boardPanel->SetBackgroundColour(wxColor(20, 200, 20));
+        this->SetBackgroundColour(wxColor(20, 200, 20));
+    }
+}
+
+void MainFrame::exitOnClick(wxCommandEvent& event)
+{
+    this->Destroy();
+}

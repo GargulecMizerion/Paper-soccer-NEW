@@ -102,6 +102,11 @@ Board::Board(int x, int y) {
 		}
 	}
 
+	this->fields[0][x / 2].setL(&(this->fields[0][x / 2 - 1]));
+	this->fields[0][x / 2].setP(&(this->fields[0][x / 2 + 1]));
+	this->fields[0][x / 2 - 1].setP(&(this->fields[0][x / 2]));
+	this->fields[0][x / 2 + 1].setL(&(this->fields[0][x / 2]));
+
 	// PRZYPISYWANIE WSKAŹNIKÓW DLA BRAMEK 
 
 	//BRAMKA TOP
