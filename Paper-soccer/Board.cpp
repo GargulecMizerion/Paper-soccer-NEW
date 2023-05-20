@@ -102,6 +102,8 @@ Board::Board(int x, int y) {
 		}
 	}
 
+	this->fields[y/2][x/2].setVisited(1);
+
 	this->fields[0][x / 2].setL(&(this->fields[0][x / 2 - 1]));
 	this->fields[0][x / 2].setP(&(this->fields[0][x / 2 + 1]));
 	this->fields[0][x / 2 - 1].setP(&(this->fields[0][x / 2]));
